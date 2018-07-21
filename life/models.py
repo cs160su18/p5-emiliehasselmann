@@ -7,13 +7,13 @@ class Food(models.Model):
 class GroceryList(models.Model):
 # 	 = models.DateTimeField(auto_now_add=True)
   food = models.ForeignKey(Food, on_delete=models.CASCADE)
-  quantity = models.IntegerField()
+  quantity = models.CharField(max_length=50)
  # name = models.CharField(max_length=50)
 
 class PantryList(models.Model):
 # 	 = models.DateTimeField(auto_now_add=True)
   food = models.ForeignKey(Food, on_delete=models.CASCADE)
-  quantity = models.IntegerField()
+  quantity = models.CharField(max_length=50)
  # name = models.CharField(max_length=50)
 
 

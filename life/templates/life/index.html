@@ -14,11 +14,73 @@
 		<script src="{% static '/life/vendor/jquery-ui/jquery-ui.min.js' %}"></script>
 	</head>
 	<body>
-		{% for food in foods %}
+		<!-- {% for item in grocerylist %}
     <p>
-      {{ food.name }}
+      {{ item.food.name }} {{item.food.price}} {{item.quantity}}
     </p>
-    {% endfor %}
-
+    {% endfor %} -->
+    
+    
+   <h1>
+     Grocery List
+    </h1> 
+   <table>
+   <tr>
+     <th>Food Item</th>
+     <th>Price</th> 
+     <th>Quantity</th> 
+   </tr>
+   {% for item in grocerylist %}
+   <tr>
+       <td>{{item.food.name}}</td>
+       <td>{{item.food.price}}</td>
+        <td>{{item.quantity}}</td>
+   </tr>
+   {% endfor %}
+</table>
+    
+    
+       <h1>
+     Pantry List
+    </h1> 
+   <table id="PantryTable">
+   <tr>
+     <th>Food Item</th>
+     <th>Quantity</th> 
+   </tr>
+   {% for item in pantrylist %}
+   <tr>
+       <td>{{item.food.name}}</td>
+        <td>{{item.quantity}}</td>
+   </tr>
+   {% endfor %}
+</table>
+    
+    <textarea name="textarea" rows="10" cols="10">"Food"</textarea>
+    <textarea name="comment" rows="10" cols="10">"Quantity"</textarea>
+    <button type="button" class="btn btn-light" onclick="uploadgrocery()">Add to grocery list</button>
+    <button type="button" class="btn btn-light" onclick="uploadpantry()">Add to pantry list</button>
+    
+  
+    
+    
+ 
 	</body>
+  <script>
+      var table = document.getElementById("PantryTable");
+      function uploadpantry() {
+      var row = table.insertRow(1);
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+      console.log($("comment").val())
+      cell1.innerHTML = $("textarea").val();
+      cell2.innerHTML = "3";
+    }
+    
+    
+    
+    
+    
+    
+  </script>
 </html>
