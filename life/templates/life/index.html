@@ -62,10 +62,23 @@
     <button type="button" class="btn btn-light" onclick="uploadpantry()">Add to pantry list</button> -->
     
     <input type="text"></input>
-    <button class="btn  btn-default">
+    <button id="testbutton" class="btn  btn-default">
       submit
     </button>
-    
+    <br>
+  
+    <input id="groceryFood" type="text" placeholder="Food Item"></input>
+    <input id="groceryQuantity" type="text" placeholder="Quantity"></input>
+    <button id="grocerySubmit" class="btn  btn-default">
+      Add to Grocery List
+    </button>
+<br>
+<br>
+    <input id="pantryFood" type="text" placeholder="Food Item"></input>
+    <input id="pantryQuantity" type="text" placeholder="Quantity"></input>
+    <button id="pantrySubmit" class="btn  btn-default">
+      Add to Pantry List
+    </button>
   
     
     
@@ -100,8 +113,8 @@
     }
     var csrftoken = getCookie('csrftoken');
     
-    $("button").button().click(function (event){
-      var postdata = {
+    $("#testbutton").button().click(function (event){
+      let postdata = {
         'name': $("input").val(),
       };
       $.ajax({
@@ -112,7 +125,22 @@
         contentType:"application/json",
         dataType:"json"
       });
-                             });
+      });
+    
+    $("#grocerySubmit").button().click(function (event){
+      let grocerydata = {
+        'food': $("#groceryFood").val(),
+        'quantity': $('#groceryQuantity').val()
+      };
+      $.ajax({
+        url:"/life/",
+        method:"POST",
+        headers:{"X-CSRFToken": csrftoken},
+        data:JSON.stringify(grocerydata),
+        contentType:"application/json",
+        dataType:"json"
+      });
+      });
     
     
     
