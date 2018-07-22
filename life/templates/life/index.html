@@ -107,23 +107,11 @@
         return cookieValue;
     }
     var csrftoken = getCookie('csrftoken');
-    
-    $("#testbutton").button().click(function (event){
-      let postdata = {
-        'name': $("input").val(),
-      };
-      $.ajax({
-        url:"/life/",
-        method:"POST",
-        headers:{"X-CSRFToken": csrftoken},
-        data:JSON.stringify(postdata),
-        contentType:"application/json",
-        dataType:"json"
-      });
-      });
+   
     
     $("#grocerySubmit").button().click(function (event){
       let grocerydata = {
+        'listType': 'groceryList',
         'food': $("#groceryFood").val(),
         'quantity': $('#groceryQuantity').val()
       };
@@ -137,6 +125,21 @@
       });
       });
     
+      $("#pantrySubmit").button().click(function (event){
+      let pantrydata = {
+        'listType': 'pantryList',
+        'food': $("#pantryFood").val(),
+        'quantity': $('#pantryQuantity').val()
+      };
+      $.ajax({
+        url:"/life/",
+        method:"POST",
+        headers:{"X-CSRFToken": csrftoken},
+        data:JSON.stringify(pantrydata),
+        contentType:"application/json",
+        dataType:"json"
+      });
+      });
     
     
     
