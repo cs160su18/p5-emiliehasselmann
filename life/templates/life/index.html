@@ -56,10 +56,15 @@
    {% endfor %}
 </table>
     
-    <textarea name="textarea" rows="10" cols="10">"Food"</textarea>
+<!--     <textarea name="textarea" rows="10" cols="10">"Food"</textarea>
     <textarea name="comment" rows="10" cols="10">"Quantity"</textarea>
     <button type="button" class="btn btn-light" onclick="uploadgrocery()">Add to grocery list</button>
-    <button type="button" class="btn btn-light" onclick="uploadpantry()">Add to pantry list</button>
+    <button type="button" class="btn btn-light" onclick="uploadpantry()">Add to pantry list</button> -->
+    
+    <input type="text"></input>
+    <button class="btn  btn-default">
+      submit
+    </button>
     
   
     
@@ -67,15 +72,47 @@
  
 	</body>
   <script>
-      var table = document.getElementById("PantryTable");
-      function uploadpantry() {
-      var row = table.insertRow(1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      console.log($("comment").val())
-      cell1.innerHTML = $("textarea").val();
-      cell2.innerHTML = "3";
+//       var table = document.getElementById("PantryTable");
+//       function uploadpantry() {
+//       var row = table.insertRow(1);
+//       var cell1 = row.insertCell(0);
+//       var cell2 = row.insertCell(1);
+//       console.log($("comment").val())
+//       cell1.innerHTML = $("textarea").val();
+//       cell2.innerHTML = "3";
+//     }
+    
+    //sample from slide
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
     }
+    var csrftoken = getCookie('csrftoken');
+    
+    $("button").button().click(function (event){
+      var postdata = {
+        'name': $("input").val(),
+      };
+      $.ajax({
+        url:"/life/",
+        method:"POST",
+        headers:{"X-CSRFToken": csrftoken},
+        data:JSON.stringify(postdata),
+        contentType:"application/json",
+        dataType:"json"
+      });
+                             });
     
     
     
